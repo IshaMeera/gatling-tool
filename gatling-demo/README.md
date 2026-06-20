@@ -1,52 +1,108 @@
-# Gatling JS - JavaScript and TypeScript demo projects
+# Performance Testing with Gatling JS
 
-A simple showcase of JavaScript and TypeScript NPM projects using Gatling JS. Please also check out the [introduction to JavaScript scripting](https://docs.gatling.io/tutorials/scripting-intro-js/) in the Gatling documentation.
+This project contains Gatling JavaScript simulations for load and performance testing APIs.
 
 ## Prerequisites
 
-You need [Node.js](https://nodejs.org/en/download) v20 or later (LTS versions only) and npm v10 or later (included with Node.js).
+Install the following:
 
-## Use demo project
+* Node.js v20+ (LTS recommended)
+* npm v10+
 
-Run the typeScript sample:
+Verify installation:
 
-```shell
-cd typescript
-npm install
-npx gatling run --typescript --simulation basicSimulation # automatically download Gatling runtime, build the project, and run the basicSimulation simulation
+```bash
+node -v
+npm -v
 ```
 
-Or the JavaScript sample:
+## Project Setup
 
-```shell
-cd javascript
+Install dependencies:
+
+```bash
 npm install
-npx gatling run --simulation basicSimulation # automatically download Gatling runtime, build the project, and run the basicSimulation simulation
 ```
 
-You can also launch the [Gatling Recorder](https://docs.gatling.io/tutorials/recorder/) and use it to capture browser-based actions and help create a realistic user scenario:
+## Running Simulations
 
-```shell
+Run a specific simulation:
+
+```bash
+npx gatling run --simulation forgotPasswordSimulation
+```
+
+Example:
+
+```bash
+npx gatling run --simulation loginSimulation
+npx gatling run --simulation forgotPasswordSimulation
+npx gatling run --simulation registrationSimulation
+```
+
+## Project Structure
+
+```text
+.
+├── simulations/
+│   ├── forgotPasswordSimulation.js
+│   ├── loginSimulation.js
+│   └── registrationSimulation.js
+├── resources/
+├── package.json
+└── README.md
+```
+
+## NPM Scripts
+
+Available helper commands:
+
+```bash
+npm run clean          # Remove generated reports
+npm run build          # Build Gatling bundle
+npm run forgotPassword # Run Forgot Password simulation
+npm run login          # Run Login simulation
+```
+
+Example package.json scripts:
+
+```json
+{
+  "scripts": {
+    "forgotPassword": "gatling run --simulation forgotPasswordSimulation",
+    "login": "gatling run --simulation loginSimulation"
+  }
+}
+```
+
+## Reports
+
+After execution, Gatling generates an HTML report containing:
+
+* Total requests
+* Successful requests
+* Failed requests
+* Response times
+* Percentiles
+* Throughput
+
+Open the generated report in a browser to analyze results.
+
+## Recording User Flows
+
+Launch the Gatling Recorder:
+
+```bash
 npx gatling recorder
 ```
 
-The `gatling` command-line tool has a built-in help function:
+Use the recorder to capture browser interactions and generate simulation templates.
 
-```shell
-npx gatling --help # List all available commands
-npx gatling run --help # List options for the "run" command (--help also works for all other available commands)
-```
+## Help
 
-## Included helper scripts
+View available Gatling commands:
 
-Note that both sample projects include a few aliases in the `package.json`'s `scripts` section, which you can use for convenience or refer to as examples:
-
-```shell
-npm run clean # Delete Gatling bundled code and generated reports
-npm run format # Format code with prettier
-npm run format-check # Format code check with prettier
-npm run check # TypeScript project only, type check but don't build or run
-npm run build # Build project but don't run
-npm run basicSimulation # Run the included basicSimulation simulation
-npm run recorder # Starts the Gatling Recorder
+```bash
+npx gatling --help
+npx gatling run --help
 ```
